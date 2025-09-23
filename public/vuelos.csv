@@ -1,0 +1,12 @@
+nombre_pasajero,email_pasajero,aerolinea,numero_vuelo,origen,destino,fecha_vuelo,hora_salida,codigo_reserva
+Juan Pérez,juan@email.com,Aerolíneas Argentinas,AR1234,BUE,MAD,2025-09-25,14:30,ABC123
+María López,maria@email.com,LATAM,LA5678,BUE,SCL,2025-09-24,10:00:00,DEF456
+Carlos Gómez,carlos@email.com,Aerolíneas Argentinas,AR4321,MAD,BUE,2025-09-26,09:15:00,GHI789
+Lucía Fernández,lucia@email.com,FlyBondi,FB8765,BUE,COR,2025-09-23,16:45:00,JKL012
+Tomas Novick,tnovick@tripnow.com.ar,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,16:45:00,JKL012
+paola novick,paonovick10@gmail.com,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,16:45:00,JKL012
+Pedro Martínez,pedro@email.com,American Airlines,AA135,BUE,MIA,2025-09-28,18:00:00,MNO345
+Tomas Novick,tnovick@tripnow.com.ar,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,21:00:00,JKL012
+paola novick,paonovick10@gmail.com,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,22:00:00,JKL012
+Tomas Novick,tnovick@tripnow.com.ar,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,22:45:00,JKL012
+paola novick,paonovick10@gmail.com,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,23:45:00,JKL012
