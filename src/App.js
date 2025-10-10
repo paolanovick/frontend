@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Papa from "papaparse";
 import CheckinList from "./components/CheckinList";
+import InscribirVueloForm from "./components/InscribirVueloForm";
 import "./index.css";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
   return (
     <div className="App">
       <h1>Vuelos Próximos para Check-in</h1>
+      <InscribirVueloForm />
       <CheckinList vuelos={vuelos} />
     </div>
   );
