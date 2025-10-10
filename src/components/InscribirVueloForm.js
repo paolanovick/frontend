@@ -24,11 +24,14 @@ export default function InscribirVueloForm({ onSuccess }) {
     setMensaje("");
     try {
       // Reemplazá esta URL por la de tu webhook de n8n
-      const resp = await fetch("http://167.172.31.249:5678/webhook/vueloForm", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const resp = await fetch(
+        "https://c0837e164e7e.ngrok-free.app/webhook/vueloForm",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        }
+      );
       if (resp.ok) {
         setMensaje("Vuelo inscripto correctamente.");
         setForm({
