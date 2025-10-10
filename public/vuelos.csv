@@ -1,12 +1,12 @@
 nombre_pasajero,email_pasajero,aerolinea,numero_vuelo,origen,destino,fecha_vuelo,hora_salida,codigo_reserva
-Juan Pérez,juan@email.com,Aerolíneas Argentinas,AR1234,BUE,MAD,2025-09-25,14:30,ABC123
-María López,maria@email.com,LATAM,LA5678,BUE,SCL,2025-09-24,15:50,DEF456
-Carlos Gómez,carlos@email.com,Aerolíneas Argentinas,AR4321,MAD,BUE,2025-09-26,15:51,GHI789
-Lucía Fernández,lucia@email.com,FlyBondi,FB8765,BUE,COR,2025-09-23,15:52,JKL012
-Tomas Novick,tnovick@tripnow.com.ar,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,15:53,JKL012
-paola novick,paonovick10@gmail.com,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,15:54,JKL012
-Pedro Martínez,pedro@email.com,American Airlines,AA135,BUE,MIA,2025-09-28,15:55,MNO345
-Tomas Novick,tnovick@tripnow.com.ar,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,15:56,JKL012
-paola novick,paonovick10@gmail.com,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,15:57,JKL012
-Tomas Novick,tnovick@tripnow.com.ar,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,15:58,JKL012
-paola novick,paonovick10@gmail.com,Aerolineas argentinas,FB8765,BUE,COR,2025-09-23,15:59,JKL012
+Juan Pérez,juan@email.com,Aerolíneas Argentinas,AR1234,BUE,MAD,2026-10-10,16:05,ABC123
+María López,maria@email.com,LATAM,LA5678,BUE,SCL,2026-10-08,16:06,DEF456
+Carlos Gómez,carlos@email.com,Aerolíneas Argentinas,AR4321,MAD,BUE,2026-10-09,16:07,GHI789
+Lucía Fernández,lucia@email.com,FlyBondi,FB8765,BUE,COR,2026-10-10,16:08,JKL012
+Tomas Novick,tnovick@tripnow.com.ar,Aerolineas argentinas,FB8765,BUE,COR,2026-10-11,16:09,JKL012
+paola novick,paonovick10@gmail.com,Aerolineas argentinas,FB8765,BUE,COR,2026-10-12,16:10,JKL012
+Pedro Martínez,pedro@email.com,American Airlines,AA135,BUE,MIA,2026-10-13,16:11,MNO345
+Tomas Novick,tnovick@tripnow.com.ar,Aerolineas argentinas,FB8765,BUE,COR,2026-10-14,16:12,JKL012
+paola novick,paonovick10@gmail.com,Aerolineas argentinas,FB8765,BUE,COR,2026-10-15,16:13,JKL012
+Tomas Novick,tnovick@tripnow.com.ar,Aerolineas argentinas,FB8765,BUE,COR,2026-10-16,16:14,JKL012
+paola novick,paonovick10@gmail.com,Aerolineas argentinas,FB8765,BUE,COR,2026-10-17,16:15,JKL012
