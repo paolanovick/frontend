@@ -23,15 +23,16 @@ export default function InscribirVueloForm({ onSuccess }) {
     e.preventDefault();
     setMensaje("");
     try {
-      // Reemplazá esta URL por la de tu webhook de n8n
+      // Fetch usando HTTPS + CORS (n8n)
       const resp = await fetch(
-        "https://occupations-shift-lights-gates.trycloudflare.com/webhook/vueloForm",
+        "https://discovered-secrets-advise-became.trycloudflare.com/webhook/vueloForm",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
+          body: JSON.stringify(form), // usamos el estado directamente
         }
       );
+
       if (resp.ok) {
         setMensaje("Vuelo inscripto correctamente.");
         setForm({
@@ -51,6 +52,7 @@ export default function InscribirVueloForm({ onSuccess }) {
       }
     } catch (err) {
       setMensaje("Error de red o servidor.");
+      console.error(err);
     }
   };
 
