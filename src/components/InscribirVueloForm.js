@@ -38,7 +38,7 @@ export default function InscribirVueloForm({ onSuccess }) {
 
       // 4️⃣ Enviar a tu webhook de n8n
       const resp = await fetch(
-        "http://167.172.31.249:5678/webhook/vueloForm",
+        "https://n8n.triptest.com.ar/webhook/vueloForm",
         {
           method: "POST",
           body: formData, // ⚠️ no pongas headers manuales
