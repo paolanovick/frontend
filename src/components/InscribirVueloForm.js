@@ -24,29 +24,33 @@ export default function InscribirVueloForm({ onSuccess }) {
     setMensaje("");
 
     try {
-      // 1️⃣ Crear contenido CSV (encabezado + fila)
-      const headers = Object.keys(form).join(",") + "\n";
-      const values = Object.values(form).join(",") + "\n";
-      const csvContent = headers + values;
+      // Combinar fecha y hora en un solo campo
+      const fechaHoraVuelo = `${form.fecha_vuelo}T${form.hora_salida}:00`;
 
-      // 2️⃣ Crear archivo CSV en memoria (Blob)
-      const blob = new Blob([csvContent], { type: "text/csv" });
-
-      // 3️⃣ Adjuntar el archivo al FormData
-      const formData = new FormData();
-      formData.append("file", blob, "vuelo.csv");
-
-      // 4️⃣ Enviar a tu webhook de n8n
+      // Enviar como JSON (NO como FormData)
       const resp = await fetch(
         "https://n8n.triptest.com.ar/webhook/vueloForm",
         {
           method: "POST",
-          body: formData, // ⚠️ no pongas headers manuales
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nombre: form.nombre_pasajero,
+            apellido: "", // Si no lo tienes, déjalo vacío
+            email: form.email_pasajero,
+            aerolinea: form.aerolinea,
+            numeroVuelo: form.numero_vuelo,
+            origen: form.origen,
+            destino: form.destino,
+            fechaVuelo: fechaHoraVuelo,
+            codigoReserva: form.codigo_reserva,
+          }),
         }
       );
 
       if (resp.ok) {
-        setMensaje("Vuelo inscripto correctamente y CSV enviado.");
+        setMensaje("✅ Vuelo inscripto correctamente.");
         setForm({
           nombre_pasajero: "",
           email_pasajero: "",
@@ -60,11 +64,11 @@ export default function InscribirVueloForm({ onSuccess }) {
         });
         onSuccess && onSuccess();
       } else {
-        setMensaje("Error al inscribir vuelo.");
+        setMensaje("❌ Error al inscribir vuelo.");
       }
     } catch (err) {
       console.error(err);
-      setMensaje("Error de red o servidor.");
+      setMensaje("❌ Error de red o servidor.");
     }
   };
 
