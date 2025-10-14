@@ -38,7 +38,7 @@ export default function InscribirVueloForm({ onSuccess }) {
 
       // 4️⃣ Enviar a tu webhook de n8n
       const resp = await fetch(
-        "https://TU-DOMINIO-O-IP/webhook/vueloForm", // 🔹 reemplazá con tu URL real de n8n
+        "http://167.172.31.249:5678/webhook/vueloForm",
         {
           method: "POST",
           body: formData, // ⚠️ no pongas headers manuales
