@@ -24,8 +24,7 @@ export default function InscribirVueloForm({ onSuccess }) {
     setMensaje("");
 
     try {
-      // Combinar fecha y hora en un solo campo
-      const fechaHoraVuelo = `${form.fecha_vuelo}T${form.hora_salida}:00`;
+    
 
       // Enviar como JSON (NO como FormData)
       const resp = await fetch(
@@ -36,15 +35,15 @@ export default function InscribirVueloForm({ onSuccess }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            nombre: form.nombre_pasajero,
-            apellido: "", // Si no lo tienes, déjalo vacío
-            email: form.email_pasajero,
+            nombre_pasajero: form.nombre_pasajero,
+            email_pasajero: form.email_pasajero,
             aerolinea: form.aerolinea,
-            numeroVuelo: form.numero_vuelo,
+            numero_vuelo: form.numero_vuelo,
             origen: form.origen,
             destino: form.destino,
-            fechaVuelo: fechaHoraVuelo,
-            codigoReserva: form.codigo_reserva,
+            fecha_vuelo: form.fecha_vuelo,
+            hora_salida: form.hora_salida,
+            codigo_reserva: form.codigo_reserva,
           }),
         }
       );
