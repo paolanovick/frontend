@@ -24,13 +24,12 @@ export default function InscribirVueloForm({ onSuccess }) {
     setMensaje("");
 
     try {
-    
-
       // Enviar como JSON (NO como FormData)
-      const resp = await fetch(
-        "https://n8n.triptest.com.ar/webhook/vueloForm",
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbwIn8VL6uoAObhikGoWkyGIUqGJpNZArjLbGCs6reZv6xjpMH02arHv4VRg-bOan9A/exec",
         {
           method: "POST",
+          mode: "no-cors",
           headers: {
             "Content-Type": "application/json",
           },
@@ -48,23 +47,19 @@ export default function InscribirVueloForm({ onSuccess }) {
         }
       );
 
-      if (resp.ok) {
-        setMensaje("✅ Vuelo inscripto correctamente.");
-        setForm({
-          nombre_pasajero: "",
-          email_pasajero: "",
-          aerolinea: "",
-          numero_vuelo: "",
-          origen: "",
-          destino: "",
-          fecha_vuelo: "",
-          hora_salida: "",
-          codigo_reserva: "",
-        });
-        onSuccess && onSuccess();
-      } else {
-        setMensaje("❌ Error al inscribir vuelo.");
-      }
+      setMensaje("✅ Vuelo inscripto correctamente.");
+      setForm({
+        nombre_pasajero: "",
+        email_pasajero: "",
+        aerolinea: "",
+        numero_vuelo: "",
+        origen: "",
+        destino: "",
+        fecha_vuelo: "",
+        hora_salida: "",
+        codigo_reserva: "",
+      });
+      onSuccess && onSuccess();
     } catch (err) {
       console.error(err);
       setMensaje("❌ Error de red o servidor.");
