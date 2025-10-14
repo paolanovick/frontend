@@ -1,4 +1,3 @@
-// src/components/InscribirVueloForm.js
 import React, { useState } from "react";
 
 export default function InscribirVueloForm({ onSuccess }) {
@@ -13,6 +12,7 @@ export default function InscribirVueloForm({ onSuccess }) {
     hora_salida: "",
     codigo_reserva: "",
   });
+
   const [mensaje, setMensaje] = useState("");
 
   const handleChange = (e) => {
@@ -22,19 +22,31 @@ export default function InscribirVueloForm({ onSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMensaje("");
+
     try {
-      // Fetch usando HTTPS + CORS (n8n)
+      // 1️⃣ Crear contenido CSV (encabezado + fila)
+      const headers = Object.keys(form).join(",") + "\n";
+      const values = Object.values(form).join(",") + "\n";
+      const csvContent = headers + values;
+
+      // 2️⃣ Crear archivo CSV en memoria (Blob)
+      const blob = new Blob([csvContent], { type: "text/csv" });
+
+      // 3️⃣ Adjuntar el archivo al FormData
+      const formData = new FormData();
+      formData.append("file", blob, "vuelo.csv");
+
+      // 4️⃣ Enviar a tu webhook de n8n
       const resp = await fetch(
-        "https://discovered-secrets-advise-became.trycloudflare.com/webhook/vueloForm",
+        "https://TU-DOMINIO-O-IP/webhook/vueloForm", // 🔹 reemplazá con tu URL real de n8n
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form), // usamos el estado directamente
+          body: formData, // ⚠️ no pongas headers manuales
         }
       );
 
       if (resp.ok) {
-        setMensaje("Vuelo inscripto correctamente.");
+        setMensaje("Vuelo inscripto correctamente y CSV enviado.");
         setForm({
           nombre_pasajero: "",
           email_pasajero: "",
@@ -51,14 +63,15 @@ export default function InscribirVueloForm({ onSuccess }) {
         setMensaje("Error al inscribir vuelo.");
       }
     } catch (err) {
-      setMensaje("Error de red o servidor.");
       console.error(err);
+      setMensaje("Error de red o servidor.");
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="inscribir-form">
       <h2>Inscribir Nuevo Vuelo</h2>
+
       <input
         name="nombre_pasajero"
         placeholder="Nombre pasajero"
@@ -122,6 +135,7 @@ export default function InscribirVueloForm({ onSuccess }) {
         onChange={handleChange}
         required
       />
+
       <button type="submit">Inscribir Vuelo</button>
       {mensaje && <p>{mensaje}</p>}
     </form>
