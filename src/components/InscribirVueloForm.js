@@ -26,7 +26,7 @@ export default function InscribirVueloForm({ onSuccess }) {
     try {
       // Enviar como JSON (NO como FormData)
       await fetch(
-        "https://script.google.com/macros/s/AKfycbwIn8VL6uoAObhikGoWkyGIUqGJpNZArjLbGCs6reZv6xjpMH02arHv4VRg-bOan9A/exec",
+        "https://script.google.com/macros/s/AKfycbwUu9CEOMafFpi8We1QS_gXewY-uU15hOLCIceyWfrDa20LWNLMKJ8HomT_UQFCwpH-/exec",
         {
           method: "POST",
           mode: "no-cors",
