@@ -19,53 +19,54 @@ export default function InscribirVueloForm({ onSuccess }) {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMensaje("");
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+   setMensaje("");
 
-    try {
-      // Enviar como JSON (NO como FormData)
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbwUu9CEOMafFpi8We1QS_gXewY-uU15hOLCIceyWfrDa20LWNLMKJ8HomT_UQFCwpH-/exec",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            nombre_pasajero: form.nombre_pasajero,
-            email_pasajero: form.email_pasajero,
-            aerolinea: form.aerolinea,
-            numero_vuelo: form.numero_vuelo,
-            origen: form.origen,
-            destino: form.destino,
-            fecha_vuelo: form.fecha_vuelo,
-            hora_salida: form.hora_salida,
-            codigo_reserva: form.codigo_reserva,
-          }),
-        }
-      );
+   try {
+     const resp = await fetch(
+       "https://script.google.com/macros/s/AKfycbwUu9CEOMafFpi8We1QS_gXewY-uU15hOLCIceyWfrDa20LWNLMKJ8HomT_UQFCwpH-/exec",
+       {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           nombre_pasajero: form.nombre_pasajero,
+           email_pasajero: form.email_pasajero,
+           aerolinea: form.aerolinea,
+           numero_vuelo: form.numero_vuelo,
+           origen: form.origen,
+           destino: form.destino,
+           fecha_vuelo: form.fecha_vuelo,
+           hora_salida: form.hora_salida,
+           codigo_reserva: form.codigo_reserva,
+         }),
+       }
+     );
 
-      setMensaje("✅ Vuelo inscripto correctamente.");
-      setForm({
-        nombre_pasajero: "",
-        email_pasajero: "",
-        aerolinea: "",
-        numero_vuelo: "",
-        origen: "",
-        destino: "",
-        fecha_vuelo: "",
-        hora_salida: "",
-        codigo_reserva: "",
-      });
-      onSuccess && onSuccess();
-    } catch (err) {
-      console.error(err);
-      setMensaje("❌ Error de red o servidor.");
-    }
-  };
-
+     if (resp.ok) {
+       setMensaje("✅ Vuelo inscripto correctamente.");
+       setForm({
+         nombre_pasajero: "",
+         email_pasajero: "",
+         aerolinea: "",
+         numero_vuelo: "",
+         origen: "",
+         destino: "",
+         fecha_vuelo: "",
+         hora_salida: "",
+         codigo_reserva: "",
+       });
+       onSuccess && onSuccess();
+     } else {
+       setMensaje("❌ Error al inscribir vuelo.");
+     }
+   } catch (err) {
+     console.error(err);
+     setMensaje("❌ Error de red o servidor.");
+   }
+ };
   return (
     <form onSubmit={handleSubmit} className="inscribir-form">
       <h2>Inscribir Nuevo Vuelo</h2>
