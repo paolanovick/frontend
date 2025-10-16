@@ -1,41 +1,30 @@
-import React, { useEffect, useState } from "react";
-import Papa from "papaparse";
-import CheckinList from "./components/CheckinList";
-import InscribirVueloForm from "./components/InscribirVueloForm";
-import "./index.css";
+import React from "react";
+import Header from "./Header"; // Componente para el logo y navegación
+import Footer from "./Footer"; // Componente footer
+import CheckinList from "./components/CheckinList"; // Lista de vuelos
+import InscribirVueloForm from "./components/InscribirVueloForm"; // Formulario
 
 function App() {
-  const [vuelos, setVuelos] = useState([]);
-
-  useEffect(() => {
-    // Leer CSV desde public
-    Papa.parse("/vuelos.csv", {
-      download: true,
-      header: true,
-      complete: (results) => {
-        // Filtrar vuelos próximos 24-48h
-        const ahora = new Date();
-        const en24horas = new Date(ahora.getTime() + 24 * 60 * 60 * 1000);
-        const vuelosProximos = results.data.filter((vuelo) => {
-          const fechaVuelo = new Date(
-            `${vuelo.fecha_vuelo} ${vuelo.hora_salida}`
-          );
-          const tiempoAntes = new Date(
-            fechaVuelo.getTime() - 24 * 60 * 60 * 1000
-          );
-          return ahora >= tiempoAntes && fechaVuelo <= en24horas;
-        });
-        setVuelos(vuelosProximos);
-      },
-      error: (err) => console.error("Error leyendo CSV:", err),
-    });
-  }, []);
+  // Como n8n maneja la carga y envío de datos, aquí no necesitas lógica adicional
 
   return (
-    <div className="App">
-      <h1>Vuelos Próximos para Check-in</h1>
-      <InscribirVueloForm />
-      <CheckinList vuelos={vuelos} />
+    <div>
+      <Header />
+
+      {/* Sección del formulario - será la primera sección visible */}
+      <section
+        style={{ padding: "40px 20px", maxWidth: "800px", margin: "0 auto" }}
+      >
+        <InscribirVueloForm />
+      </section>
+
+      {/* Lista de vuelos próximos */}
+      <section style={{ padding: "20px" }}>
+        <CheckinList vuelos={[]} />{" "}
+        {/* Puedes actualizar esto en el futuro si necesitas */}
+      </section>
+
+      <Footer />
     </div>
   );
 }
