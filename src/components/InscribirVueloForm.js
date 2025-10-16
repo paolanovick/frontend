@@ -61,184 +61,471 @@ export default function InscribirVueloForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 py-12 px-4">
-      <div className="max-w-3xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-8 text-center">
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#f5f5f5",
+        padding: "40px 20px",
+        fontFamily:
+          "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      }}
+    >
+      <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+        {/* Header con Logo */}
+        <div
+          style={{
+            backgroundColor: "#ffffff",
+            borderRadius: "12px 12px 0 0",
+            padding: "30px 40px",
+            textAlign: "center",
+            borderBottom: "1px solid #e0e0e0",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+          }}
+        >
           <img
             src="https://drive.google.com/uc?export=view&id=14ANnqXL7wjkjRzIwKQT8HYe90sTO8U1B"
             alt="TripNow Logo"
-            className="mx-auto mb-6 h-24 object-contain"
+            style={{
+              maxWidth: "200px",
+              height: "auto",
+              display: "block",
+              margin: "0 auto",
+            }}
           />
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-3">
-            Sistema de Check-in Automático
+        </div>
+
+        {/* Título */}
+        <div
+          style={{
+            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+            padding: "30px 40px",
+            textAlign: "center",
+          }}
+        >
+          <h1
+            style={{
+              margin: "0",
+              color: "#ffffff",
+              fontSize: "28px",
+              fontWeight: "600",
+            }}
+          >
+            ✈️ Sistema de Check-in Automático
           </h1>
-          <p className="text-gray-600 text-lg">
-            Registrá los vuelos de tus pasajeros y enviaremos recordatorios
-            automáticos
+          <p
+            style={{
+              margin: "10px 0 0 0",
+              color: "#e0e7ff",
+              fontSize: "14px",
+            }}
+          >
+            Registrá los vuelos de tus pasajeros
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-gray-100">
-            <div className="bg-gradient-to-br from-purple-500 to-indigo-600 p-3 rounded-xl shadow-lg text-2xl">
-              ✈️
-            </div>
-            <h2 className="text-2xl font-bold text-gray-800">
-              Inscribir Nuevo Vuelo
-            </h2>
-          </div>
-
-          <div className="space-y-5">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                👤 Nombre del Pasajero
-              </label>
-              <input
-                name="nombre_pasajero"
-                placeholder="Juan Pérez"
-                value={form.nombre_pasajero}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                📧 Email del Pasajero
-              </label>
-              <input
-                name="email_pasajero"
-                type="email"
-                placeholder="juan@email.com"
-                value={form.email_pasajero}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  🏢 Aerolínea
-                </label>
-                <input
-                  name="aerolinea"
-                  placeholder="Aerolineas Argentinas"
-                  value={form.aerolinea}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  #️⃣ Número de Vuelo
-                </label>
-                <input
-                  name="numero_vuelo"
-                  placeholder="AR1234"
-                  value={form.numero_vuelo}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  📍 Origen
-                </label>
-                <input
-                  name="origen"
-                  placeholder="Buenos Aires (EZE)"
-                  value={form.origen}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  📍 Destino
-                </label>
-                <input
-                  name="destino"
-                  placeholder="Bariloche"
-                  value={form.destino}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  📅 Fecha de Vuelo
-                </label>
-                <input
-                  type="date"
-                  name="fecha_vuelo"
-                  value={form.fecha_vuelo}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  🕐 Hora de Salida
-                </label>
-                <input
-                  type="time"
-                  name="hora_salida"
-                  value={form.hora_salida}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                🔖 Código de Reserva
-              </label>
-              <input
-                name="codigo_reserva"
-                placeholder="ABC123"
-                value={form.codigo_reserva}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
-              />
-            </div>
-
-            <button
-              onClick={handleSubmit}
-              disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-4 rounded-xl font-bold text-lg hover:from-purple-600 hover:to-indigo-700 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl"
+        {/* Formulario */}
+        <div
+          style={{
+            backgroundColor: "#ffffff",
+            padding: "40px",
+            borderRadius: "0 0 12px 12px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+          }}
+        >
+          <div style={{ marginBottom: "25px" }}>
+            <label
+              style={{
+                display: "block",
+                color: "#666666",
+                fontSize: "12px",
+                textTransform: "uppercase",
+                letterSpacing: "0.5px",
+                marginBottom: "8px",
+              }}
             >
-              {isSubmitting ? "Inscribiendo..." : "✈️ Inscribir Vuelo"}
-            </button>
-
-            {mensaje && (
-              <div
-                className={`p-4 rounded-xl text-center font-semibold ${
-                  mensaje.includes("✅")
-                    ? "bg-green-100 text-green-800 border-2 border-green-300"
-                    : "bg-red-100 text-red-800 border-2 border-red-300"
-                }`}
-              >
-                {mensaje}
-              </div>
-            )}
+              Nombre del Pasajero
+            </label>
+            <input
+              name="nombre_pasajero"
+              placeholder="Juan Pérez"
+              value={form.nombre_pasajero}
+              onChange={handleChange}
+              required
+              style={{
+                width: "100%",
+                padding: "14px 16px",
+                border: "1px solid #e0e0e0",
+                borderRadius: "8px",
+                fontSize: "15px",
+                fontWeight: "600",
+                color: "#333333",
+                backgroundColor: "#f8f9fa",
+                boxSizing: "border-box",
+                outline: "none",
+              }}
+            />
           </div>
+
+          <div style={{ marginBottom: "25px" }}>
+            <label
+              style={{
+                display: "block",
+                color: "#666666",
+                fontSize: "12px",
+                textTransform: "uppercase",
+                letterSpacing: "0.5px",
+                marginBottom: "8px",
+              }}
+            >
+              Email del Pasajero
+            </label>
+            <input
+              name="email_pasajero"
+              type="email"
+              placeholder="juan@email.com"
+              value={form.email_pasajero}
+              onChange={handleChange}
+              required
+              style={{
+                width: "100%",
+                padding: "14px 16px",
+                border: "1px solid #e0e0e0",
+                borderRadius: "8px",
+                fontSize: "15px",
+                fontWeight: "600",
+                color: "#333333",
+                backgroundColor: "#f8f9fa",
+                boxSizing: "border-box",
+                outline: "none",
+              }}
+            />
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "15px",
+              marginBottom: "25px",
+            }}
+          >
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  color: "#666666",
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.5px",
+                  marginBottom: "8px",
+                }}
+              >
+                Aerolínea
+              </label>
+              <input
+                name="aerolinea"
+                placeholder="Aerolineas Argentinas"
+                value={form.aerolinea}
+                onChange={handleChange}
+                required
+                style={{
+                  width: "100%",
+                  padding: "14px 16px",
+                  border: "1px solid #e0e0e0",
+                  borderRadius: "8px",
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  color: "#333333",
+                  backgroundColor: "#f8f9fa",
+                  boxSizing: "border-box",
+                  outline: "none",
+                }}
+              />
+            </div>
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  color: "#666666",
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.5px",
+                  marginBottom: "8px",
+                }}
+              >
+                Vuelo
+              </label>
+              <input
+                name="numero_vuelo"
+                placeholder="AR1234"
+                value={form.numero_vuelo}
+                onChange={handleChange}
+                required
+                style={{
+                  width: "100%",
+                  padding: "14px 16px",
+                  border: "1px solid #e0e0e0",
+                  borderRadius: "8px",
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  color: "#333333",
+                  backgroundColor: "#f8f9fa",
+                  boxSizing: "border-box",
+                  outline: "none",
+                }}
+              />
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "15px",
+              marginBottom: "25px",
+            }}
+          >
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  color: "#666666",
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.5px",
+                  marginBottom: "8px",
+                }}
+              >
+                Origen
+              </label>
+              <input
+                name="origen"
+                placeholder="Buenos Aires (EZE)"
+                value={form.origen}
+                onChange={handleChange}
+                required
+                style={{
+                  width: "100%",
+                  padding: "14px 16px",
+                  border: "1px solid #e0e0e0",
+                  borderRadius: "8px",
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  color: "#333333",
+                  backgroundColor: "#f8f9fa",
+                  boxSizing: "border-box",
+                  outline: "none",
+                }}
+              />
+            </div>
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  color: "#666666",
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.5px",
+                  marginBottom: "8px",
+                }}
+              >
+                Destino
+              </label>
+              <input
+                name="destino"
+                placeholder="Bariloche"
+                value={form.destino}
+                onChange={handleChange}
+                required
+                style={{
+                  width: "100%",
+                  padding: "14px 16px",
+                  border: "1px solid #e0e0e0",
+                  borderRadius: "8px",
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  color: "#333333",
+                  backgroundColor: "#f8f9fa",
+                  boxSizing: "border-box",
+                  outline: "none",
+                }}
+              />
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "15px",
+              marginBottom: "25px",
+            }}
+          >
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  color: "#666666",
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.5px",
+                  marginBottom: "8px",
+                }}
+              >
+                Fecha
+              </label>
+              <input
+                type="date"
+                name="fecha_vuelo"
+                value={form.fecha_vuelo}
+                onChange={handleChange}
+                required
+                style={{
+                  width: "100%",
+                  padding: "14px 16px",
+                  border: "1px solid #e0e0e0",
+                  borderRadius: "8px",
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  color: "#333333",
+                  backgroundColor: "#f8f9fa",
+                  boxSizing: "border-box",
+                  outline: "none",
+                }}
+              />
+            </div>
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  color: "#666666",
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.5px",
+                  marginBottom: "8px",
+                }}
+              >
+                Hora de salida
+              </label>
+              <input
+                type="time"
+                name="hora_salida"
+                value={form.hora_salida}
+                onChange={handleChange}
+                required
+                style={{
+                  width: "100%",
+                  padding: "14px 16px",
+                  border: "1px solid #e0e0e0",
+                  borderRadius: "8px",
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  color: "#333333",
+                  backgroundColor: "#f8f9fa",
+                  boxSizing: "border-box",
+                  outline: "none",
+                }}
+              />
+            </div>
+          </div>
+
+          <div style={{ marginBottom: "30px" }}>
+            <label
+              style={{
+                display: "block",
+                color: "#666666",
+                fontSize: "12px",
+                textTransform: "uppercase",
+                letterSpacing: "0.5px",
+                marginBottom: "8px",
+              }}
+            >
+              Código de reserva
+            </label>
+            <input
+              name="codigo_reserva"
+              placeholder="ABC123"
+              value={form.codigo_reserva}
+              onChange={handleChange}
+              required
+              style={{
+                width: "100%",
+                padding: "14px 16px",
+                border: "1px solid #e0e0e0",
+                borderRadius: "8px",
+                fontSize: "15px",
+                fontWeight: "600",
+                color: "#333333",
+                backgroundColor: "#f8f9fa",
+                boxSizing: "border-box",
+                letterSpacing: "1px",
+                outline: "none",
+              }}
+            />
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+            style={{
+              width: "100%",
+              padding: "16px 40px",
+              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+              color: "#ffffff",
+              border: "none",
+              borderRadius: "8px",
+              fontSize: "16px",
+              fontWeight: "600",
+              cursor: isSubmitting ? "not-allowed" : "pointer",
+              boxShadow: "0 4px 12px rgba(102, 126, 234, 0.3)",
+              opacity: isSubmitting ? "0.7" : "1",
+              transition: "all 0.3s ease",
+            }}
+          >
+            {isSubmitting ? "Inscribiendo..." : "Inscribir Vuelo"}
+          </button>
+
+          {mensaje && (
+            <div
+              style={{
+                marginTop: "20px",
+                padding: "20px",
+                backgroundColor: mensaje.includes("✅") ? "#d4edda" : "#f8d7da",
+                borderRadius: "8px",
+                borderLeft: mensaje.includes("✅")
+                  ? "4px solid #28a745"
+                  : "4px solid #dc3545",
+                color: mensaje.includes("✅") ? "#155724" : "#721c24",
+                fontSize: "14px",
+                lineHeight: "1.6",
+              }}
+            >
+              {mensaje}
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div
+          style={{
+            backgroundColor: "#f8f9fa",
+            padding: "25px 40px",
+            borderRadius: "0 0 12px 12px",
+            borderTop: "1px solid #e0e0e0",
+            marginTop: "-12px",
+          }}
+        >
+          <p
+            style={{
+              margin: "0",
+              color: "#999999",
+              fontSize: "12px",
+              textAlign: "center",
+              lineHeight: "1.5",
+            }}
+          >
+            Sistema automático de recordatorios de check-in
+          </p>
         </div>
       </div>
     </div>
