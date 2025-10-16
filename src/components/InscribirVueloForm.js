@@ -62,37 +62,11 @@ export default function InscribirVueloForm() {
 
   return (
     <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#f5f5f5",
-        padding: "40px 20px",
-        fontFamily:
-          "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-      }}
+     
     >
       <div style={{ maxWidth: "600px", margin: "0 auto" }}>
         {/* Header con Logo */}
-        <div
-          style={{
-            backgroundColor: "#ffffff",
-            borderRadius: "12px 12px 0 0",
-            padding: "30px 40px",
-            textAlign: "center",
-            borderBottom: "1px solid #e0e0e0",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-          }}
-        >
-          <img
-            src="https://drive.google.com/uc?export=view&id=14ANnqXL7wjkjRzIwKQT8HYe90sTO8U1B"
-            alt="TripNow Logo"
-            style={{
-              maxWidth: "200px",
-              height: "auto",
-              display: "block",
-              margin: "0 auto",
-            }}
-          />
-        </div>
+        
 
         {/* Título */}
         <div
