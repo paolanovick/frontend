@@ -1,6 +1,7 @@
 
 // Footer.jsx
 import React from "react";
+import logo from "../assets/flyPoloSF.png";
 
 export default function Footer() {
   return (
@@ -23,7 +24,7 @@ export default function Footer() {
           {/* Columna 1: Logo */}
           <div>
             <img 
-              src="https://drive.google.com/uc?export=view&id=14ANnqXL7wjkjRzIwKQT8HYe90sTO8U1B" 
+             src={logo}
               alt="Logo Agencia" 
               style={{
                 maxWidth: "200px",
