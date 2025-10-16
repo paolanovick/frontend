@@ -90,7 +90,7 @@ export default function InscribirVueloForm() {
         >
           <img
             src="https://drive.google.com/uc?export=view&id=14ANnqXL7wjkjRzIwKQT8HYe90sTO8U1B"
-            alt="TripNow Logo"
+                        alt="agenciaLogo"
             style={{
               margin: "0 auto 1.5rem",
               height: "80px",
