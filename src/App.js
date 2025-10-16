@@ -2,7 +2,8 @@ import React from "react";
 import Header from "./components/Header"; // Componente para el logo y navegación
 import Footer from "./components/Footer"; // Componente footer
 import CheckinList from "./components/CheckinList"; // Lista de vuelos
-import InscribirVueloForm from "./components/InscribirVueloForm"; // Formulario
+import InscribirVueloForm from "./components/InscribirVueloForm";
+// Formulario
 
 function App() {
   // Como n8n maneja la carga y envío de datos, aquí no necesitas lógica adicional

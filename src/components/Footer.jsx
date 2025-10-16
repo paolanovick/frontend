@@ -1,6 +1,6 @@
 // Footer.jsx
 import React from "react";
-import logo from "./assets/flyPoloSF.png";
+import logo from "../assets/flyPoloSF.png";
 
 export default function Footer() {
   return (
