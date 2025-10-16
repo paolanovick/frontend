@@ -132,7 +132,7 @@ export default function InscribirVueloForm() {
                 borderRadius: "8px",
                 fontSize: "15px",
                 fontWeight: "600",
-                color: "#333333",
+                color: "#606060ff",
                 backgroundColor: "#f8f9fa",
                 boxSizing: "border-box",
                 outline: "none",
