@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./Header"; // Componente para el logo y navegación
-import Footer from "./Footer"; // Componente footer
+import Header from "./components/Header"; // Componente para el logo y navegación
+import Footer from "./components/Footer"; // Componente footer
 import CheckinList from "./components/CheckinList"; // Lista de vuelos
 import InscribirVueloForm from "./components/InscribirVueloForm"; // Formulario
 
