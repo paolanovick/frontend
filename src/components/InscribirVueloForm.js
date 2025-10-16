@@ -8,10 +8,11 @@ import {
   Hash,
   User,
   Building2,
+  Trash2,
 } from "lucide-react";
 
 export default function InscribirVueloForm({ onSuccess }) {
-  const [formData, setFormData] = useState({
+  const [form, setForm] = useState({
     nombre_pasajero: "",
     email_pasajero: "",
     aerolinea: "",
@@ -27,12 +28,8 @@ export default function InscribirVueloForm({ onSuccess }) {
   const [pasajeros, setPasajeros] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Logo de la agencia desde Google Drive
-  const LOGO_URL =
-    "https://drive.google.com/uc?export=view&id=14ANnqXL7wjkjRzIwKQT8HYe90sTO8U1B";
-
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -49,14 +46,14 @@ export default function InscribirVueloForm({ onSuccess }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(form),
         }
       );
 
-      setPasajeros([...pasajeros, { ...formData, id: Date.now() }]);
+      setPasajeros([...pasajeros, { ...form, id: Date.now() }]);
 
       setMensaje("✅ Vuelo inscripto correctamente.");
-      setFormData({
+      setForm({
         nombre_pasajero: "",
         email_pasajero: "",
         aerolinea: "",
@@ -78,179 +75,258 @@ export default function InscribirVueloForm({ onSuccess }) {
     }
   };
 
+  const eliminarPasajero = (id) => {
+    setPasajeros(pasajeros.filter((p) => p.id !== id));
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
+        {/* Header con Logo */}
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-8 text-center">
           <img
-            src={LOGO_URL}
-            alt="Logo Agencia"
-            className="mx-auto mb-4 h-20 object-contain"
+            src="https://drive.google.com/uc?export=view&id=14ANnqXL7wjkjRzIwKQT8HYe90sTO8U1B"
+            alt="TripNow Logo"
+            className="mx-auto mb-6 h-24 object-contain"
           />
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-3">
             Sistema de Check-in Automático
           </h1>
-          <p className="text-gray-600">
-            Registra los vuelos de tus pasajeros y enviaremos recordatorios
+          <p className="text-gray-600 text-lg">
+            Registrá los vuelos de tus pasajeros y enviaremos recordatorios
             automáticos
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="bg-gradient-to-br from-purple-500 to-indigo-600 p-3 rounded-xl">
-                <Plane className="text-white" size={24} />
+        <div className="grid lg:grid-cols-5 gap-8">
+          {/* Formulario - 3 columnas */}
+          <div className="lg:col-span-3 bg-white rounded-2xl shadow-xl p-8">
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-gray-100">
+              <div className="bg-gradient-to-br from-purple-500 to-indigo-600 p-3 rounded-xl shadow-lg">
+                <Plane className="text-white" size={28} />
               </div>
               <h2 className="text-2xl font-bold text-gray-800">
                 Inscribir Nuevo Vuelo
               </h2>
             </div>
 
-            <div className="space-y-4">
-              <div className="relative">
-                <User
-                  className="absolute left-3 top-3 text-gray-400"
-                  size={20}
-                />
-                <input
-                  name="nombre_pasajero"
-                  placeholder="Nombre del pasajero"
-                  value={formData.nombre_pasajero}
-                  onChange={handleChange}
-                  className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
-                />
+            <div className="space-y-5">
+              {/* Nombre */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Nombre del Pasajero
+                </label>
+                <div className="relative">
+                  <User
+                    className="absolute left-3 top-3.5 text-gray-400"
+                    size={20}
+                  />
+                  <input
+                    name="nombre_pasajero"
+                    placeholder="Juan Pérez"
+                    value={form.nombre_pasajero}
+                    onChange={handleChange}
+                    required
+                    className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
+                  />
+                </div>
               </div>
 
-              <div className="relative">
-                <Mail
-                  className="absolute left-3 top-3 text-gray-400"
-                  size={20}
-                />
-                <input
-                  name="email_pasajero"
-                  type="email"
-                  placeholder="Email del pasajero"
-                  value={formData.email_pasajero}
-                  onChange={handleChange}
-                  className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
-                />
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Email del Pasajero
+                </label>
+                <div className="relative">
+                  <Mail
+                    className="absolute left-3 top-3.5 text-gray-400"
+                    size={20}
+                  />
+                  <input
+                    name="email_pasajero"
+                    type="email"
+                    placeholder="juan@email.com"
+                    value={form.email_pasajero}
+                    onChange={handleChange}
+                    required
+                    className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
+                  />
+                </div>
               </div>
 
-              <div className="relative">
-                <Building2
-                  className="absolute left-3 top-3 text-gray-400"
-                  size={20}
-                />
-                <input
-                  name="aerolinea"
-                  placeholder="Aerolínea (ej: Aerolineas Argentinas)"
-                  value={formData.aerolinea}
-                  onChange={handleChange}
-                  className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
-                />
-              </div>
-
-              <div className="relative">
-                <Hash
-                  className="absolute left-3 top-3 text-gray-400"
-                  size={20}
-                />
-                <input
-                  name="numero_vuelo"
-                  placeholder="Número de vuelo"
-                  value={formData.numero_vuelo}
-                  onChange={handleChange}
-                  className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
-                />
-              </div>
-
+              {/* Aerolínea y Número de vuelo */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="relative">
-                  <MapPin
-                    className="absolute left-3 top-3 text-gray-400"
-                    size={20}
-                  />
-                  <input
-                    name="origen"
-                    placeholder="Origen"
-                    value={formData.origen}
-                    onChange={handleChange}
-                    className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
-                  />
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Aerolínea
+                  </label>
+                  <div className="relative">
+                    <Building2
+                      className="absolute left-3 top-3.5 text-gray-400"
+                      size={20}
+                    />
+                    <input
+                      name="aerolinea"
+                      placeholder="Aerolineas Argentinas"
+                      value={form.aerolinea}
+                      onChange={handleChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
+                    />
+                  </div>
                 </div>
-                <div className="relative">
-                  <MapPin
-                    className="absolute left-3 top-3 text-gray-400"
-                    size={20}
-                  />
-                  <input
-                    name="destino"
-                    placeholder="Destino"
-                    value={formData.destino}
-                    onChange={handleChange}
-                    className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
-                  />
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Número de Vuelo
+                  </label>
+                  <div className="relative">
+                    <Hash
+                      className="absolute left-3 top-3.5 text-gray-400"
+                      size={20}
+                    />
+                    <input
+                      name="numero_vuelo"
+                      placeholder="AR1234"
+                      value={form.numero_vuelo}
+                      onChange={handleChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
+                    />
+                  </div>
                 </div>
               </div>
 
+              {/* Origen y Destino */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="relative">
-                  <Calendar
-                    className="absolute left-3 top-3 text-gray-400"
-                    size={20}
-                  />
-                  <input
-                    type="date"
-                    name="fecha_vuelo"
-                    value={formData.fecha_vuelo}
-                    onChange={handleChange}
-                    className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
-                  />
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Origen
+                  </label>
+                  <div className="relative">
+                    <MapPin
+                      className="absolute left-3 top-3.5 text-gray-400"
+                      size={20}
+                    />
+                    <input
+                      name="origen"
+                      placeholder="Buenos Aires (EZE)"
+                      value={form.origen}
+                      onChange={handleChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
+                    />
+                  </div>
                 </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Destino
+                  </label>
+                  <div className="relative">
+                    <MapPin
+                      className="absolute left-3 top-3.5 text-gray-400"
+                      size={20}
+                    />
+                    <input
+                      name="destino"
+                      placeholder="Bariloche"
+                      value={form.destino}
+                      onChange={handleChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Fecha y Hora */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Fecha de Vuelo
+                  </label>
+                  <div className="relative">
+                    <Calendar
+                      className="absolute left-3 top-3.5 text-gray-400 pointer-events-none"
+                      size={20}
+                    />
+                    <input
+                      type="date"
+                      name="fecha_vuelo"
+                      value={form.fecha_vuelo}
+                      onChange={handleChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Hora de Salida
+                  </label>
+                  <div className="relative">
+                    <Clock
+                      className="absolute left-3 top-3.5 text-gray-400 pointer-events-none"
+                      size={20}
+                    />
+                    <input
+                      type="time"
+                      name="hora_salida"
+                      value={form.hora_salida}
+                      onChange={handleChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Código de reserva */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Código de Reserva
+                </label>
                 <div className="relative">
-                  <Clock
-                    className="absolute left-3 top-3 text-gray-400"
+                  <Hash
+                    className="absolute left-3 top-3.5 text-gray-400"
                     size={20}
                   />
                   <input
-                    type="time"
-                    name="hora_salida"
-                    value={formData.hora_salida}
+                    name="codigo_reserva"
+                    placeholder="ABC123"
+                    value={form.codigo_reserva}
                     onChange={handleChange}
-                    className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                    required
+                    className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all text-gray-700"
                   />
                 </div>
               </div>
 
-              <div className="relative">
-                <Hash
-                  className="absolute left-3 top-3 text-gray-400"
-                  size={20}
-                />
-                <input
-                  name="codigo_reserva"
-                  placeholder="Código de reserva"
-                  value={formData.codigo_reserva}
-                  onChange={handleChange}
-                  className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
-                />
-              </div>
-
+              {/* Botón */}
               <button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-4 rounded-xl font-semibold hover:from-purple-600 hover:to-indigo-700 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
+                className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-4 rounded-xl font-bold text-lg hover:from-purple-600 hover:to-indigo-700 transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl"
               >
-                {isSubmitting ? "Inscribiendo..." : "✈️ Inscribir Vuelo"}
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Inscribiendo...
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center gap-2">
+                    <Plane size={20} />
+                    Inscribir Vuelo
+                  </span>
+                )}
               </button>
 
+              {/* Mensaje */}
               {mensaje && (
                 <div
-                  className={`p-4 rounded-xl text-center font-semibold ${
+                  className={`p-4 rounded-xl text-center font-semibold animate-pulse ${
                     mensaje.includes("✅")
-                      ? "bg-green-100 text-green-800"
-                      : "bg-red-100 text-red-800"
+                      ? "bg-green-100 text-green-800 border-2 border-green-300"
+                      : "bg-red-100 text-red-800 border-2 border-red-300"
                   }`}
                 >
                   {mensaje}
@@ -259,67 +335,91 @@ export default function InscribirVueloForm({ onSuccess }) {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
-              Pasajeros Registrados ({pasajeros.length})
-            </h2>
+          {/* Lista de Pasajeros - 2 columnas */}
+          <div className="lg:col-span-2 bg-white rounded-2xl shadow-xl p-8">
+            <div className="flex items-center justify-between mb-6 pb-4 border-b-2 border-gray-100">
+              <h2 className="text-2xl font-bold text-gray-800">Pasajeros</h2>
+              <span className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-md">
+                {pasajeros.length}
+              </span>
+            </div>
 
             {pasajeros.length === 0 ? (
-              <div className="text-center py-12 text-gray-400">
-                <Plane size={48} className="mx-auto mb-4 opacity-50" />
-                <p>No hay pasajeros registrados aún</p>
+              <div className="text-center py-16 text-gray-400">
+                <div className="bg-gray-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Plane size={40} className="opacity-50" />
+                </div>
+                <p className="text-lg font-medium">Sin pasajeros registrados</p>
+                <p className="text-sm mt-2">Los vuelos aparecerán aquí</p>
               </div>
             ) : (
-              <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
-                {pasajeros.map((pasajero) => (
+              <div className="space-y-3 max-h-[calc(100vh-300px)] overflow-y-auto pr-2">
+                {pasajeros.map((pasajero, index) => (
                   <div
                     key={pasajero.id}
-                    className="border-2 border-gray-100 rounded-xl p-4 hover:border-purple-200 hover:shadow-md transition-all"
+                    className="border-2 border-gray-100 rounded-xl p-4 hover:border-purple-300 hover:shadow-lg transition-all bg-gradient-to-br from-white to-purple-50/30"
                   >
-                    <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <h3 className="font-bold text-gray-800 text-lg">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex-1">
+                        <h3 className="font-bold text-gray-800 text-base mb-1">
                           {pasajero.nombre_pasajero}
                         </h3>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-xs text-gray-500 break-all">
                           {pasajero.email_pasajero}
                         </p>
                       </div>
-                      <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold">
-                        {pasajero.aerolinea}
-                      </span>
+                      <div className="flex gap-2 items-start">
+                        <span className="bg-purple-100 text-purple-700 px-2 py-1 rounded-lg text-xs font-bold whitespace-nowrap">
+                          {pasajero.aerolinea}
+                        </span>
+                        <button
+                          onClick={() => eliminarPasajero(pasajero.id)}
+                          className="text-red-500 hover:bg-red-50 p-1.5 rounded-lg transition-colors"
+                          title="Eliminar"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 text-sm mt-3">
+                    <div className="grid grid-cols-2 gap-2 text-xs bg-white/50 p-3 rounded-lg">
                       <div>
-                        <span className="text-gray-500">Vuelo:</span>
-                        <span className="font-semibold ml-1">
+                        <span className="text-gray-500 font-medium">
+                          Vuelo:
+                        </span>
+                        <span className="font-bold ml-1 text-gray-800">
                           {pasajero.numero_vuelo}
                         </span>
                       </div>
                       <div>
-                        <span className="text-gray-500">Código:</span>
-                        <span className="font-semibold ml-1">
+                        <span className="text-gray-500 font-medium">
+                          Código:
+                        </span>
+                        <span className="font-bold ml-1 text-gray-800">
                           {pasajero.codigo_reserva}
                         </span>
                       </div>
-                      <div className="col-span-2">
-                        <span className="text-gray-500">Ruta:</span>
-                        <span className="font-semibold ml-1">
-                          {pasajero.origen} → {pasajero.destino}
-                        </span>
+                      <div className="col-span-2 mt-1">
+                        <span className="text-gray-500 font-medium">Ruta:</span>
+                        <div className="font-bold text-gray-800 mt-1">
+                          {pasajero.origen}{" "}
+                          <span className="text-purple-500 mx-1">→</span>{" "}
+                          {pasajero.destino}
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-gray-500">Fecha:</span>
-                        <span className="font-semibold ml-1">
+                      <div className="mt-1">
+                        <span className="text-gray-500 font-medium">
+                          Fecha:
+                        </span>
+                        <div className="font-bold text-gray-800">
                           {pasajero.fecha_vuelo}
-                        </span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-gray-500">Hora:</span>
-                        <span className="font-semibold ml-1">
+                      <div className="mt-1">
+                        <span className="text-gray-500 font-medium">Hora:</span>
+                        <div className="font-bold text-gray-800">
                           {pasajero.hora_salida}
-                        </span>
+                        </div>
                       </div>
                     </div>
                   </div>
