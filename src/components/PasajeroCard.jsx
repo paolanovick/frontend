@@ -1,50 +1,45 @@
-// src/components/PasajeroCard.jsx
-export default function PasajeroCard({ pasajero }) {
-  return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 mt-8">
-      <div className="flex justify-between items-start mb-3">
-        <div>
-          <h3 className="font-bold text-gray-800 text-lg mb-1">
-            {pasajero.nombre_pasajero}
-          </h3>
-          <p className="text-sm text-gray-500 break-all">
-            {pasajero.email_pasajero}
-          </p>
-        </div>
-        <span className="bg-violet-100 text-violet-700 px-3 py-1 rounded-md text-sm font-bold">
-          {pasajero.aerolinea}
-        </span>
-      </div>
+import React from "react";
 
-      <div className="grid grid-cols-2 gap-3 text-sm bg-gray-50 p-4 rounded-md">
-        <div>
-          <span className="text-gray-500 font-medium">Vuelo:</span>{" "}
-          <span className="font-bold text-gray-800">
-            {pasajero.numero_vuelo}
-          </span>
-        </div>
-        <div>
-          <span className="text-gray-500 font-medium">Código:</span>{" "}
-          <span className="font-bold text-gray-800">
-            {pasajero.codigo_reserva}
-          </span>
-        </div>
-        <div className="col-span-2">
-          <span className="text-gray-500 font-medium">Ruta:</span>
-          <div className="font-bold text-gray-800 mt-1">
-            {pasajero.origen} <span className="text-violet-600 mx-1">→</span>
-            {pasajero.destino}
-          </div>
-        </div>
-        <div>
-          <span className="text-gray-500 font-medium">Fecha:</span>
-          <div className="font-bold text-gray-800">{pasajero.fecha_vuelo}</div>
-        </div>
-        <div>
-          <span className="text-gray-500 font-medium">Hora:</span>
-          <div className="font-bold text-gray-800">{pasajero.hora_salida}</div>
-        </div>
-      </div>
+export default function PasajeroCard({ datos }) {
+  return (
+    <div
+      className="pasajero-card"
+      style={{
+        border: "1px solid #ccc",
+        borderRadius: "8px",
+        padding: "16px",
+        marginTop: "20px",
+        backgroundColor: "#f9f9f9",
+      }}
+    >
+      <h3>✈️ Datos del vuelo inscripto</h3>
+      <p>
+        <strong>Pasajero:</strong> {datos.nombre_pasajero}
+      </p>
+      <p>
+        <strong>Email:</strong> {datos.email_pasajero}
+      </p>
+      <p>
+        <strong>Aerolínea:</strong> {datos.aerolinea}
+      </p>
+      <p>
+        <strong>Número de vuelo:</strong> {datos.numero_vuelo}
+      </p>
+      <p>
+        <strong>Origen:</strong> {datos.origen}
+      </p>
+      <p>
+        <strong>Destino:</strong> {datos.destino}
+      </p>
+      <p>
+        <strong>Fecha:</strong> {datos.fecha_vuelo}
+      </p>
+      <p>
+        <strong>Hora:</strong> {datos.hora_salida}
+      </p>
+      <p>
+        <strong>Código de reserva:</strong> {datos.codigo_reserva}
+      </p>
     </div>
   );
 }
